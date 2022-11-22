@@ -17,7 +17,7 @@ pipeline {
 				
 			}
 			
-			steps{
+			script{
 				stageResultMap.Stage1 = currentBuild.currentResult
 				echo 'stageResultMap.find{ it.key == "Stage1" }?.value'
 			}
