@@ -13,7 +13,7 @@ pipeline {
 
 				echo '************** Installing requirements ************************'
 				sh 'pip install -r requirements.txt'
-				sh 'exit 0'
+				sh 'exit 1'
 				stageResultMap.Stage1 = currentBuild.currentResult
 				
 				
@@ -24,15 +24,8 @@ pipeline {
 		}
 
 		stage('Static Code Checking') {
-			when {
-              			expression {
-                		currentBuild.currentResult == 'SUCCESS' 
-              			}
-			}
+			
             steps {
-	    	step{
-			echo 'stageResultMap.find{ it.key == "Stage1" }?.value'
-		}
                 script {
 		    
                     sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
