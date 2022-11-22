@@ -21,7 +21,7 @@ pipeline {
 		stage('Static Code Checking') {
 			when {
               			expression {
-                		currentBuild.currentResult == 'UNSTABLE' 
+                		currentBuild.currentResult == 'SUCCESS' 
               			}
 			}
             steps {
@@ -33,12 +33,34 @@ pipeline {
 
  		stage('Test') {
 		
+			when {
+              			expression {
+                		currentBuild.currentResult == 'SUCCESS' || currentBuild.currentResult == 'FAILURE' ||  currentBuild.currentResult == 'UNSTABLE'
+              			}
+			}
+		
 			steps {
 				
 				echo '******************* Test Msg **********************************'
 				sh 'pytest'
 			}
-		}       
+		}  
+		
+		stage('Deploy'){
+		
+			when {
+              			expression {
+                		currentBuild.currentResult == 'SUCCESS' 
+              			}
+			}
+		    steps {
+			script {
+			    sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
+			}
+            }
+		
+			
+		}
     		
     }
 }
