@@ -6,7 +6,7 @@ pipeline {
     stages {
 		
 
-		stage('Environment'){
+		stage('Environment Setup'){
 
 
 			steps{
