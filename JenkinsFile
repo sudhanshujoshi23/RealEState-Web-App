@@ -6,26 +6,37 @@ pipeline {
     stages {
 		
 
-		stage('Environment Setup'){
+		stage('Installing Packages'){
 
-
+			
 			steps{
 
 				echo '************** Installing requirements ************************'
 				sh 'pip install -r requirements.txt'
+				sh 'exit(1)'
 			}
 
 		}
+
+		stage('Static Code Checking') {
+			when {
+              			expression {
+                		currentBuild.currentResult == 'FAILURE' 
+              			}
+			}
+            steps {
+                script {
+                    sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
+                }
+            }
+        }
+
  		stage('Test') {
 		
 			steps {
-
-				echo '******************* Running Tests **********************************'
-				sh 'python3 -m pytest'
 				
-				
-				
-				
+				echo '******************* Test Msg **********************************'
+				sh 'pytest'
 			}
 		}       
     		
