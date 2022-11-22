@@ -4,6 +4,25 @@ pipeline {
     agent any
     
     stages {
+		stage('SCM'){
+			steps{
+				echo '***************** GIT PULL ********************'
+				git pull https://github.com/sudhanshujoshi23/RealEState-Web-App.git
+				git checkout master
+				cd ./RealEState-Web-App
+			}
+		}
+
+		stage('Environment'){
+
+
+			steps{
+
+				echo '************** Installing requirements ************************'
+				sh 'pip install requirements.txt'
+			}
+
+		}
  		stage('Test') {
 		
 			steps {
