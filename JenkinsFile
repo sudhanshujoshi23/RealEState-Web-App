@@ -19,10 +19,10 @@ pipeline {
  		stage('Test') {
 		
 			steps {
-				script{
-					echo '******************* Running Tests **********************************'
-					sh 'pytest'
-				}
+
+				echo '******************* Running Tests **********************************'
+				sh 'python -m pytest'
+				
 				
 				
 				
