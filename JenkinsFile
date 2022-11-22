@@ -30,8 +30,11 @@ pipeline {
               			}
 			}
             steps {
+	    	step{
+			echo 'stageResultMap.find{ it.key == "Stage1" }?.value'
+		}
                 script {
-		    echo 'stageResultMap.find{ it.key == "Stage1" }?.value'
+		    
                     sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
                 }
             }
