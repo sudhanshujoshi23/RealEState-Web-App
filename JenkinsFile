@@ -21,7 +21,7 @@ pipeline {
 			steps {
 
 				echo '******************* Running Tests **********************************'
-				sh 'python -m pytest'
+				sh 'python3 -m pytest'
 				
 				
 				
