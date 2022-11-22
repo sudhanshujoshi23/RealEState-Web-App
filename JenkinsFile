@@ -21,7 +21,7 @@ pipeline {
 			steps {
 				
 				echo '******************* Running Tests **********************************'
-				sh 'pytest'
+				pytest
 				
 			}
 		}       
