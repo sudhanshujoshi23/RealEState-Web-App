@@ -1,7 +1,6 @@
-def stage1 = False
-def stage2 = False
-def stage3 = False
-def stage4 = False
+def stage1 = false
+def stage2 = false
+def stage3 = false
 
 pipeline {
     agent any
