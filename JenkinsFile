@@ -1,5 +1,5 @@
 def stage1 = false
-def stage1 = false
+def stage2 = false
 def stage3 = false
 
 pipeline {
