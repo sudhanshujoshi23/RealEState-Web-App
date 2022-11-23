@@ -16,7 +16,7 @@ pipeline {
         stage('Stage-2') {
             when {
                 expression {
-                    return {stage1}
+                    return stage1
                 }
             }
             steps {
