@@ -1,4 +1,4 @@
-def stage1 = FALSE
+def stage1 = false
 
 pipeline {
     agent any
