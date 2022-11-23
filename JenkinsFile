@@ -1,4 +1,6 @@
 def stage1 = false
+def stage2 = false
+def stage3 = false
 
 pipeline {
     agent any
@@ -23,6 +25,9 @@ pipeline {
             steps {
                 echo '---------- Stage 2 ---------------'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    script{
+                        stage2 = false
+                    }
                     sh "exit 1"
                 }
             }
@@ -31,12 +36,15 @@ pipeline {
             steps {
                 echo '---------- Stage 3 ---------------'
                 sh 'exit 0'
+                script{
+                    stage3 = true
+                }
             }
         }
         stage('Stage-4') {
             when {
                 expression {
-                    currentBuild.buildResult == 'SUCCESS'
+                    return env.stage3
                 }
             }
             steps {
