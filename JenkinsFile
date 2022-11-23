@@ -9,9 +9,9 @@ pipeline {
                 echo "-------- Stage 1 - ${stage1} ----------------"
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     script{
-                        stage1 = true
+                        stage1 = false
                     }
-                    sh "exit 0"
+                    sh "exit 1"
                 }
             }
         }
@@ -45,7 +45,7 @@ pipeline {
         stage('Stage-4') {
             when {
                 expression {
-                    return env.stage3
+                    return ${stage3}
                 }
             }
             steps {
