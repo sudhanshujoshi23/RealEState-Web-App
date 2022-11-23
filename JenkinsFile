@@ -29,6 +29,11 @@ pipeline {
             }
         }
         stage('Stage-4') {
+            when {
+                expression {
+                    currentBuild.buildResult == 'SUCCESS'
+                }
+            }
             steps {
                 echo '---------- Stage 4 ---------------'
                 sh 'exit 0'
