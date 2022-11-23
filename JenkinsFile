@@ -37,6 +37,7 @@ pipeline {
                 script{
                     stage3 = true
                 }
+                echo 'Stage-3 : ${env.stage3}'
                 sh 'exit 0'
                 
             }
