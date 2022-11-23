@@ -35,10 +35,11 @@ pipeline {
         stage('Stage-3') {
             steps {
                 echo '---------- Stage 3 ---------------'
-                sh 'exit 0'
                 script{
                     stage3 = true
                 }
+                sh 'exit 0'
+                
             }
         }
         stage('Stage-4') {
