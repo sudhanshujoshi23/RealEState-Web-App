@@ -7,6 +7,9 @@ pipeline {
             steps {
                 echo '-------- Stage 1 - ${stage1} ----------------'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    script{
+                        stage1 = false
+                    }
                     sh "exit 1"
                 }
             }
@@ -14,7 +17,7 @@ pipeline {
         stage('Stage-2') {
             when {
                 expression {
-                    currentBuild.buildResult == 'SUCCESS'
+                    ${stage1} == true
                 }
             }
             steps {
