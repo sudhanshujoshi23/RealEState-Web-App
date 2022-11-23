@@ -1,9 +1,14 @@
+def stage1 = False
+def stage2 = False
+def stage3 = False
+def stage4 = False
+
 pipeline {
     agent any
     stages {
         stage('Stage-1') {
             steps {
-                echo '-------- Stage 1 ----------------'
+                echo '-------- Stage 1 - ${stage1} ----------------'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh "exit 1"
                 }
