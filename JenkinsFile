@@ -12,15 +12,14 @@ pipeline {
 			steps{
 
 				echo '************** Installing requirements ************************'
-				// sh 'pip install -r requirements.txt'
-				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    		sh "exit 1"
-			}
+				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') 
+				{
+                	sh "exit 1"
+				}
 
 		}
 
 		stage('Static Code Checking') {
-			
             steps {
                 script {
                     sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
