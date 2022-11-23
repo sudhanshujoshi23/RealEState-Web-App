@@ -12,11 +12,6 @@ pipeline {
             }
         }
         stage('Stage-2') {
-            when {
-                expression {
-                    return ${stage1}
-                }
-            }
             steps {
                 echo '---------- Stage 2 ---------------'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
