@@ -37,7 +37,7 @@ pipeline {
                 script{
                     stage3 = true
                 }
-                echo 'Stage-3 : ${stage3}'
+                echo "Stage-3 : ${stage3}"
                 sh 'exit 0'
                 
             }
