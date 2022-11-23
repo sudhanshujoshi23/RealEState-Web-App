@@ -30,7 +30,8 @@ pipeline {
             steps {
                 echo '---------- Stage 3 ---------------'
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "exit 1"
+                    stage3 = true
+                    sh "exit 0"
                 }
             }
         }
