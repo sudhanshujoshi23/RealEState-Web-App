@@ -12,60 +12,33 @@ pipeline {
 			steps{
 
 				echo '************** Installing requirements ************************'
+				// sh 'pip install -r requirements.txt'
 				sh 'exit 1'
-				
-				
 			}
-			
-			
 
 		}
 
 		stage('Static Code Checking') {
-		
 			when {
-              			expression {
-                			currentBuild.currentResult == 'FAILURE'
-              			}
+              expression {
+                currentBuild.currentResult == 'FAILURE' 
+              }
 			}
-			
-            		steps {
-                		echo 'Static Code Checking'
-                    		sh "exit 1"
+            steps {
+                script {
+                    sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
                 }
             }
         }
 
  		stage('Test') {
 		
-			when {
-              			expression {
-                		currentBuild.currentResult == 'SUCCESS' || currentBuild.currentResult == 'FAILURE' ||  currentBuild.currentResult == 'UNSTABLE'
-              			}
-			}
-		
 			steps {
 				
 				echo '******************* Test Msg **********************************'
 				sh 'pytest'
 			}
-		}  
-		
-		stage('Deploy'){
-		
-			when {
-              			expression {
-                		currentBuild.currentResult == 'SUCCESS' 
-              			}
-			}
-		    steps {
-			script {
-			    sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
-			}
-            }
-		
-			
-		}
+		}       
     		
     }
 }
