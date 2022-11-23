@@ -6,12 +6,12 @@ pipeline {
     stages {
         stage('Stage-1') {
             steps {
-                echo '-------- Stage 1 - ${stage1} ----------------'
+                echo "-------- Stage 1 - ${stage1} ----------------"
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     script{
-                        stage1 = false
+                        stage1 = true
                     }
-                    sh "exit 1"
+                    sh "exit 0"
                 }
             }
         }
