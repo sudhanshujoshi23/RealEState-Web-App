@@ -1,41 +1,22 @@
-
 pipeline {
-
     agent any
-    
     stages {
-		
-
-		stage('Installing Packages'){
-
-			
-			steps{
-
-				echo '************** Installing requirements ************************'
-				catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') 
-				{
-                	sh "exit 1"
-				}
-
-		}
-
-		stage('Static Code Checking') {
+        stage('1') {
             steps {
-                script {
-                    sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
+                sh 'exit 0'
+            }
+        }
+        stage('2') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh "exit 1"
                 }
             }
         }
-
- 		stage('Test') {
-		
-			steps {
-				
-				echo '******************* Test Msg **********************************'
-				sh 'pytest'
-			}
-		}       
-    		
+        stage('3') {
+            steps {
+                sh 'exit 0'
+            }
+        }
     }
-}
 }
