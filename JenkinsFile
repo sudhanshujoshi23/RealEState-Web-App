@@ -17,7 +17,7 @@ pipeline {
         stage('Stage-2') {
             when {
                 expression {
-                    ${stage1} == true
+                    return env.stage1
                 }
             }
             steps {
